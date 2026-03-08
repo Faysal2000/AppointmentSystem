@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppointmentSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260307091249_InitDB1")]
-    partial class InitDB1
+    [Migration("20260308085757_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,41 +33,41 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorServiceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("appointmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("doctorId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorServiceId")
+                    b.Property<int?>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("patientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("serviceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("status")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("doctorId");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("doctorServiceId");
+                    b.HasIndex("DoctorServiceId");
 
-                    b.HasIndex("patientId");
+                    b.HasIndex("PatientId");
 
-                    b.HasIndex("serviceId");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Appointments");
                 });
@@ -80,19 +80,19 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("experienceYears")
+                    b.Property<int>("ExperienceYears")
                         .HasColumnType("int");
 
-                    b.Property<string>("specialization")
+                    b.Property<string>("Specialization")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Doctors");
@@ -106,21 +106,21 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("dayOfWeek")
+                    b.Property<int>("DayOfWeek")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorId")
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("endTime")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("startTime")
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("doctorId");
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("DoctorSchedules");
                 });
@@ -133,23 +133,23 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("doctorId")
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("durationInMints")
+                    b.Property<int>("DurationInMints")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("serviceId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("doctorId");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("serviceId");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("DoctorServices");
                 });
@@ -185,28 +185,28 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("appointmentId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("issuedDate")
+                    b.Property<DateTime>("IssuedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("paidDate")
+                    b.Property<DateTime>("PaidDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("patientId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<string>("status")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("totalAmount")
+                    b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("appointmentId")
+                    b.HasIndex("AppointmentId")
                         .IsUnique();
 
                     b.ToTable("Invoices");
@@ -220,18 +220,18 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("dateOfBirth")
+                    b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
-                    b.Property<string>("fullName")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("gender")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("phone")
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -267,14 +267,14 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DurationInMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("serviceName")
+                    b.Property<int>("DurationInMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServiceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -308,76 +308,68 @@ namespace AppointmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("address")
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("roleId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("roleId");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("AppointmentSystem.Models.Appointment", b =>
                 {
-                    b.HasOne("AppointmentSystem.Models.Doctor", "Doctor")
+                    b.HasOne("AppointmentSystem.Models.Doctor", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("doctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("AppointmentSystem.Models.DoctorService", "DoctorService")
                         .WithMany("Appointments")
-                        .HasForeignKey("doctorServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DoctorServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("AppointmentSystem.Models.Patient", "Patient")
                         .WithMany("Appointments")
-                        .HasForeignKey("patientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("AppointmentSystem.Models.Service", "Service")
+                    b.HasOne("AppointmentSystem.Models.Service", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("serviceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
+                        .HasForeignKey("ServiceId");
 
                     b.Navigation("DoctorService");
 
                     b.Navigation("Patient");
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("AppointmentSystem.Models.Doctor", b =>
                 {
                     b.HasOne("AppointmentSystem.Models.User", null)
                         .WithOne("Doctor")
-                        .HasForeignKey("AppointmentSystem.Models.Doctor", "userId")
+                        .HasForeignKey("AppointmentSystem.Models.Doctor", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -386,7 +378,7 @@ namespace AppointmentSystem.Migrations
                 {
                     b.HasOne("AppointmentSystem.Models.Doctor", "Doctor")
                         .WithMany("DoctorSchedules")
-                        .HasForeignKey("doctorId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -397,13 +389,13 @@ namespace AppointmentSystem.Migrations
                 {
                     b.HasOne("AppointmentSystem.Models.Doctor", null)
                         .WithMany("DoctorServices")
-                        .HasForeignKey("doctorId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AppointmentSystem.Models.Service", null)
                         .WithMany("DoctorServices")
-                        .HasForeignKey("serviceId")
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -431,7 +423,7 @@ namespace AppointmentSystem.Migrations
                 {
                     b.HasOne("AppointmentSystem.Models.Appointment", null)
                         .WithOne("Invoice")
-                        .HasForeignKey("AppointmentSystem.Models.Invoice", "appointmentId")
+                        .HasForeignKey("AppointmentSystem.Models.Invoice", "AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -440,14 +432,15 @@ namespace AppointmentSystem.Migrations
                 {
                     b.HasOne("AppointmentSystem.Models.Role", null)
                         .WithMany("Users")
-                        .HasForeignKey("roleId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("AppointmentSystem.Models.Appointment", b =>
                 {
-                    b.Navigation("Invoice");
+                    b.Navigation("Invoice")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AppointmentSystem.Models.Doctor", b =>

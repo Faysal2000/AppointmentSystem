@@ -4,16 +4,16 @@
     {
         public int Id { get; set; }
 
-        public string fullName {  get; set; }=string.Empty;
+        public string FullName {  get; set; }=string.Empty;
 
-        public string email { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
 
         public string PasswordHash { get; set; }= string.Empty;
-        public string phone {  get; set; } = string.Empty;
+        public string Phone {  get; set; } = string.Empty;
 
-        public int roleId { get; set; }
+        public int RoleId { get; set; }
 
-        public string address {  get; set; } = string.Empty;
+        public string Address {  get; set; } = string.Empty;
 
 
         public Doctor? Doctor { get; set; }

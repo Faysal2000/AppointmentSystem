@@ -4,13 +4,13 @@
     {
         public int Id { get; set; } 
 
-        public int doctorId {  get; set; }
+        public int DoctorId {  get; set; }
 
-        public int serviceId {  get; set; }
+        public int ServiceId {  get; set; }
 
-        public int durationInMints { get; set; }
+        public int DurationInMints { get; set; }
 
-        public decimal price {  get; set; }
+        public decimal Price {  get; set; }
 
         public ICollection<Appointment>? Appointments { get; set; }
 

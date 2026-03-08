@@ -3,10 +3,10 @@
     public class Doctor
     {
         public int Id { get; set; }
-        public int userId { get; set; }
-        public string specialization {  get; set; } = string.Empty;
+        public int UserId { get; set; }
+        public string Specialization {  get; set; } = string.Empty;
 
-        public int experienceYears {  get; set; }
+        public int ExperienceYears {  get; set; }
 
 
         public ICollection<DoctorService>? DoctorServices { get; set; }

@@ -22,33 +22,50 @@ namespace AppointmentSystem.Data
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<DoctorSpecialty> DoctorSpecialties { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+
+        //    // Appointment -> Service
+        //    modelBuilder.Entity<Service>()
+        //        .HasMany(a => a.Appointments)
+        //        .WithOne(s => s.Service)
+        //        .HasForeignKey(s => s.ServiceId)
+        //        .OnDelete(DeleteBehavior.Restrict);
+
+        //    // Appointment -> Patient
+        //    modelBuilder.Entity<Appointment>()
+        //        .HasOne(a => a.Patient)
+        //        .WithMany(p => p.Appointments)
+        //        .HasForeignKey(a => a.PatientId)
+        //        .OnDelete(DeleteBehavior.Restrict);
+
+        //    // Appointment -> Doctor
+        //    modelBuilder.Entity<Appointment>()
+        //        .HasOne(a => a.Doctor)
+        //        .WithMany(d => d.Appointments)
+        //        .HasForeignKey(a => a.DoctorId)
+        //        .OnDelete(DeleteBehavior.Restrict);
+        //}
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Appointment -> Service
-            modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.Service)
-                .WithMany(s => s.Appointments)
-                .HasForeignKey(a => a.ServiceId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Appointment -> Patient
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Patient)
                 .WithMany(p => p.Appointments)
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Appointment -> Doctor
             modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.Doctor)
-                .WithMany(d => d.Appointments)
-                .HasForeignKey(a => a.DoctorId)
+                .HasOne(a => a.DoctorService)
+                .WithMany(ds => ds.Appointments)
+                .HasForeignKey(a => a.DoctorServiceId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
-
-
 
 
     }

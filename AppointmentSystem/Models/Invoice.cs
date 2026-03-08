@@ -4,16 +4,16 @@
     {
         public int Id { get; set; } 
 
-        public int patientId {  get; set; }
+        public int PatientId {  get; set; }
 
-        public int appointmentId {  get; set; }
+        public int AppointmentId {  get; set; }
 
-        public decimal totalAmount {  get; set; }
+        public decimal TotalAmount {  get; set; }
 
-        public string status { get; set; }=string.Empty;
+        public string Status { get; set; }=string.Empty;
 
-        public DateTime issuedDate { get; set; }
+        public DateTime IssuedDate { get; set; }
 
-        public DateTime paidDate { get; set; }
+        public DateTime PaidDate { get; set; }
     }
 }

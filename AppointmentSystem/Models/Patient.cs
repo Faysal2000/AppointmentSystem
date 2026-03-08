@@ -4,13 +4,13 @@
     {
         public int Id { get; set; }
 
-        public string fullName {  get; set; } =string.Empty;    
+        public string FullName {  get; set; } =string.Empty;    
 
-        public DateOnly dateOfBirth {  get; set; }
+        public DateOnly DateOfBirth {  get; set; }
 
-        public string gender { get; set; }  = string.Empty;
+        public string Gender { get; set; }  = string.Empty;
 
-        public string phone {  get; set; }=string.Empty;
+        public string Phone {  get; set; }=string.Empty;
 
 
 
